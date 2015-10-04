@@ -1,0 +1,28 @@
+#!/bin/bash
+# Get the containing directory.
+DOTS=$(cd "$(dirname "$0")" && pwd -P)
+
+# If there's an iCloud Drive folder, symlink it into $HOME.
+CLOUD="$HOME/Library/Mobile Documents/com~apple~CloudDocs/"
+if [ -d "$CLOUD" -a ! -a "$HOME/Cloud" ]; then
+  ln -s "$CLOUD" "$HOME/Cloud"
+fi
+
+# Symlink the rc files.
+for f in "$DOTS"/*rc; do
+  ln -s "$f" $HOME/.$(basename "$f")
+done
+
+# Symlink the remaining files.
+ln -s "$DOTS"/gitconfig $HOME/.gitconfig
+
+# Check if running on OSX.
+if [ "$(uname -s)" == 'Darwin' ]; then
+  if ! type brew 2>/dev/null; then
+    # Optionally install Homebrew.
+    read -e -n 1 -p 'Install Homebrew (y/N)? ' BREW
+    if [ "$BREW" == 'y' ]; then
+      ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    fi
+  fi
+fi

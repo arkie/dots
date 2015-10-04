@@ -1,0 +1,15 @@
+# Set up screen.
+altscreen on
+defscrollback 5000
+nethack on
+startup_message off
+
+# Allow mouse scrollback.
+termcapinfo xterm* ti@:te@
+
+# Set status line to show windows, time.
+hardstatus lastline '%{=} %=%w %=%c:%s '
+
+# Open vim and shell as default screens.
+screen vim
+screen

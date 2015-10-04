@@ -1,0 +1,9 @@
+[alias]
+  br = branch
+  co = checkout
+  st = status
+  su = submodule foreach git pull origin master
+[push]
+  default = matching
+[user]
+  email = char7f@gmail.com

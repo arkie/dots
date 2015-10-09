@@ -1,24 +1,34 @@
 # Load modules.
-autoload -U colors && colors
-autoload -U compinit && compinit
+autoload -Uz colors && colors
+autoload -Uz compinit && compinit
+autoload -Uz vcs_info
 
-# Set the title to last command in screen.
+# Initailize VCS info, and in screen set the title to last command.
 if [[ "$TERM" == "screen" ]]; then
   precmd () {
     echo -ne "\ekzsh\e\\"
+    vcs_info
   }
   preexec () {
     echo -ne "\ek$1\e\\"
   }
+else
+  precmd () {
+    vcs_info
+  }
 fi
 
-# Set up environment.
+# Set up the environment.
 export EDITOR='vim'
 export NETHACKOPTIONS='autodig,boulder=0,color,decgraphics,lit_corridor,nopet,pickup_types=$,time'
 export PATH="node_modules/.bin:$PATH"
 
-# Set up prompt.
-PS1=' %F{blue}%1~%f '
+# Enable prompt variable use and configure the VCS prompt.
+setopt prompt_subst
+zstyle ':vcs_info:*' formats '%F{green}%b'
+
+# Set up left and right prompts.
+PS1=' %F{blue}%1~${vcs_info_msg_0_}%f '
 RPS1='%*'
 
 # Set vim key mode and bindings.

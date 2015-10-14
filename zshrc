@@ -34,8 +34,6 @@ RPS1='%*'
 # Set vim key mode and bindings.
 bindkey -v
 bindkey -M viins 'jk' vi-cmd-mode
-
-# Set additional key bindings.
 bindkey '^a' beginning-of-line
 bindkey '^e' end-of-line
 bindkey '^r' history-incremental-search-backward
@@ -48,12 +46,14 @@ alias dl='screen -ls'
 alias ls='ls -G'
 alias l='ls -lA'
 
-# Set up conditional aliases.
+# Handle conditional shortcuts.
 if [ -e "$HOME/Cloud" ]; then
-  alias c='cd $HOME/Cloud/ && ls'
+  c(){cd "$HOME/Cloud/$1";}
+  compctl -W "$HOME/Cloud" -/ c
 fi
 if [ -e "$HOME/Documents" ]; then
-  alias d='cd $HOME/Documents/ && ls'
+  d(){cd "$HOME/Documents/$1";}
+  compctl -W "$HOME/Documents" -/ d
 fi
 if [ -d "$GOPATH" ]; then
   PATH="$PATH:$GOPATH/bin"

@@ -48,11 +48,11 @@ alias l='ls -lA'
 
 # Handle conditional shortcuts.
 if [ -e "$HOME/Cloud" ]; then
-  c(){cd "$HOME/Cloud/$1";}
+  c(){cd "$HOME/Cloud/$1"; ls}
   compctl -W "$HOME/Cloud" -/ c
 fi
 if [ -e "$HOME/Documents" ]; then
-  d(){cd "$HOME/Documents/$1";}
+  d(){cd "$HOME/Documents/$1"; ls}
   compctl -W "$HOME/Documents" -/ d
 fi
 if [ -d "$GOPATH" ]; then

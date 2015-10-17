@@ -39,9 +39,11 @@ vmap < <gv
 inoremap jk <ESC>
 
 " Add non-standard extensions.
-autocmd BufRead,BufNewFile *.json set filetype=javascript
-autocmd BufRead,BufNewFile *.md set filetype=markdown
+autocmd BufNewFile,BufRead *.go set filetype=go
+autocmd BufNewFile,BufRead *.json set filetype=javascript
+autocmd BufNewFile,BufRead *.md set filetype=markdown
 
 " Add filetype local behavior.
-autocmd FileType gitcommit,markdown setlocal spell
 autocmd FileType css setlocal iskeyword+=-
+autocmd FileType gitcommit,markdown setlocal spell
+autocmd FileType go setlocal noexpandtab

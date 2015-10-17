@@ -26,6 +26,7 @@ export PATH="node_modules/.bin:$PATH"
 # Enable prompt variable use and configure the VCS prompt.
 setopt prompt_subst
 zstyle ':vcs_info:*' formats '%F{green}%b'
+zstyle ':vcs_info:*' actionformats '%F{green}%b%F{blue}«%F{green}%a'
 
 # Set up left and right prompts.
 PS1=' %F{blue}%1~${vcs_info_msg_0_}%f '

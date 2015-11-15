@@ -18,10 +18,6 @@ set expandtab
 " Use ^o to togger insert (paste) mode.
 set pastetoggle=<C-o>
 
-" Map jk to move by visual line.
-map j gj
-map k gk
-
 " Map ^hjkl to move between window panes.
 map <C-h> <C-w>h
 map <C-j> <C-w>j
@@ -47,3 +43,6 @@ autocmd BufNewFile,BufRead *.md set filetype=markdown
 autocmd FileType css setlocal iskeyword+=-
 autocmd FileType gitcommit,markdown setlocal spell
 autocmd FileType go setlocal noexpandtab
+
+" Add a git blame command.
+command Blame !cd %:p:h && git blame %:t

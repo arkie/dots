@@ -55,6 +55,9 @@ fi
 if [ -e "$HOME/Documents" ]; then
   d(){cd "$HOME/Documents/$1"; ls}
   compctl -W "$HOME/Documents" -/ d
+  if [ -e "$HOME/Documents/go" ]; then
+    export GOPATH="$HOME/Documents/go"
+  fi
 fi
 if [ -d "$GOPATH" ]; then
   PATH="$PATH:$GOPATH/bin"

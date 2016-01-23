@@ -13,8 +13,12 @@ for f in "$DOTS"/*rc; do
   ln -s "$f" $HOME/.$(basename "$f")
 done
 
+# Make folders for linking into.
+mkdir -p "$HOME/.config/git"
+
 # Symlink the remaining files.
-ln -s "$DOTS"/gitconfig $HOME/.gitconfig
+ln -s "$DOTS"/gitconfig "$HOME/.gitconfig"
+ln -s "$DOTS"/.gitignore "$HOME/.config/git/ignore"
 
 # Check if running on OSX.
 if [ "$(uname -s)" == 'Darwin' ]; then

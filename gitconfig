@@ -4,6 +4,6 @@
   st = status
   su = submodule foreach git pull origin master
 [push]
-  default = matching
+  default = current
 [user]
   email = char7f@gmail.com

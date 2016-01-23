@@ -44,6 +44,7 @@ bindkey "^?" backward-delete-char
 # Set up common aliases.
 alias dr='screen -DR'
 alias dl='screen -ls'
+alias grep='grep --color=auto'
 alias ls='ls -G'
 alias l='ls -lA'
 
@@ -61,4 +62,7 @@ if [ -e "$HOME/Documents" ]; then
 fi
 if [ -d "$GOPATH" ]; then
   PATH="$PATH:$GOPATH/bin"
+fi
+if [ -d "$HOME/Library/Logs/CoreSimulator" ]; then
+  alias simlog='tail -f $HOME/Library/Logs/CoreSimulator/*/system.log'
 fi

@@ -3,6 +3,7 @@ filetype plugin indent on
 set ruler
 set textwidth=80
 set wildmenu
+set t_Co=256
 syntax enable
 
 " Reload the current buffer if changed externally.
@@ -45,4 +46,4 @@ autocmd FileType gitcommit,markdown setlocal spell
 autocmd FileType go setlocal noexpandtab
 
 " Add a git blame command.
-command Blame !cd %:p:h && git blame %:t
+command Blame !cd "%:p:h" && git blame "%:t"

@@ -44,6 +44,7 @@ autocmd BufNewFile,BufRead *.md set filetype=markdown
 autocmd FileType css setlocal iskeyword+=-
 autocmd FileType gitcommit,markdown setlocal spell
 autocmd FileType go setlocal noexpandtab
+autocmd FileType html setlocal textwidth=0
 
 " Add a git blame command.
 command Blame !cd "%:p:h" && git blame "%:t"

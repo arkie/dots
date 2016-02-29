@@ -47,4 +47,6 @@ autocmd FileType go setlocal noexpandtab
 autocmd FileType html setlocal textwidth=0
 
 " Add a git blame command.
-command Blame !cd "%:p:h" && git blame "%:t"
+if !exists(':Blame')
+  command Blame !cd "%:p:h" && git blame "%:t"
+endif

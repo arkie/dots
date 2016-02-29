@@ -1,4 +1,5 @@
-# dots
+dots
+----
 
 Public repository of home directory config files, with a setup script.
 

@@ -20,6 +20,16 @@ mkdir -p "$HOME/.config/git"
 ln -s "$DOTS"/gitconfig "$HOME/.gitconfig"
 ln -s "$DOTS"/.gitignore "$HOME/.config/git/ignore"
 
+# Check if running under zsh.
+if [ "$SHELL" != "/bin/zsh" ]; then
+  if [ -x "/bin/zsh" ]; then
+    read -e -n 1 -p 'Change shell to zsh (y/N)? ' ZSH
+    if [ "$ZSH" == 'y' ]; then
+      chsh -s /bin/zsh
+    fi
+  fi
+fi
+
 # Check if running on OSX.
 if [ "$(uname -s)" == 'Darwin' ]; then
   if ! type brew 2>/dev/null; then

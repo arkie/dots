@@ -7,7 +7,6 @@ set t_Co=256
 syntax enable
 
 " Reload the current buffer if changed externally.
-au BufEnter * checktime
 set autoread
 
 " Auto indent with 2 spaces.
@@ -35,16 +34,26 @@ vmap < <gv
 " Map jk to command mode.
 inoremap jk <ESC>
 
-" Add non-standard extensions.
-autocmd BufNewFile,BufRead *.go set filetype=go
-autocmd BufNewFile,BufRead *.json set filetype=javascript
-autocmd BufNewFile,BufRead *.md set filetype=markdown
+" Allow auto reloading the vimrc.
+augroup reload
+  autocmd!
+  autocmd BufWritePost $MYVIMRC  source $MYVIMRC
 
-" Add filetype local behavior.
-autocmd FileType css setlocal iskeyword+=-
-autocmd FileType gitcommit,markdown setlocal spell
-autocmd FileType go setlocal noexpandtab
-autocmd FileType html setlocal textwidth=0
+  " Always check for modifications.
+  autocmd BufEnter * checktime
+
+  " Add non-standard extensions.
+  autocmd BufNewFile,BufRead *.go set filetype=go
+  autocmd BufNewFile,BufRead *.json set filetype=javascript
+  autocmd BufNewFile,BufRead *.md set filetype=markdown
+
+  " Add filetype local behavior.
+  autocmd BufWritePost *.go,<go> silent execute "!gofmt -s -w %" | redraw! | edit
+  autocmd FileType css setlocal iskeyword+=-
+  autocmd FileType gitcommit,markdown setlocal spell
+  autocmd FileType go setlocal noexpandtab
+  autocmd FileType html setlocal textwidth=0
+augroup END
 
 " Add a git blame command.
 if !exists(':Blame')

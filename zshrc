@@ -3,6 +3,16 @@ autoload -Uz colors && colors
 autoload -Uz compinit && compinit
 autoload -Uz vcs_info
 
+# Set up the environment.
+export EDITOR='vim'
+export NETHACKOPTIONS='autodig,boulder=0,color,decgraphics,lit_corridor,nopet,pickup_types=$,time'
+export PATH="$PATH:node_modules/.bin"
+
+# Enable prompt variable use and configure the VCS prompt.
+setopt prompt_subst
+zstyle ':vcs_info:*' formats '%F{green}%b'
+zstyle ':vcs_info:*' actionformats '%F{green}%b%F{blue}«%F{green}%a'
+
 # Initailize VCS info, and in screen set the title to last command.
 if [[ "$TERM" == "screen" ]]; then
   precmd () {
@@ -17,16 +27,6 @@ else
     vcs_info
   }
 fi
-
-# Set up the environment.
-export EDITOR='vim'
-export NETHACKOPTIONS='autodig,boulder=0,color,decgraphics,lit_corridor,nopet,pickup_types=$,time'
-export PATH="node_modules/.bin:$PATH"
-
-# Enable prompt variable use and configure the VCS prompt.
-setopt prompt_subst
-zstyle ':vcs_info:*' formats '%F{green}%b'
-zstyle ':vcs_info:*' actionformats '%F{green}%b%F{blue}«%F{green}%a'
 
 # Set up left and right prompts.
 PS1=' %F{blue}%1~${vcs_info_msg_0_}%f '
@@ -46,7 +46,7 @@ alias dr='screen -DR'
 alias dl='screen -ls'
 alias grep='grep --color=auto'
 alias ls='ls -G'
-alias l='ls -lA'
+alias l='ls -lAh'
 
 # Handle conditional shortcuts.
 if [ -e "$HOME/Cloud" ]; then
@@ -65,4 +65,14 @@ if [ -d "$GOPATH" ]; then
 fi
 if [ -d "$HOME/Library/Logs/CoreSimulator" ]; then
   alias simlog='tail -f $HOME/Library/Logs/CoreSimulator/*/system.log'
+fi
+if [ -x "$(command -v virtualenv)" ]; then
+  virtualenv_=0
+  virt(){
+    if [ "$virtualenv_" = 0 ]; then
+      virtualenv /tmp/env && source /tmp/env/bin/activate && virtualenv_=1
+    else
+      deactivate && rm -rf /tmp/env && virtualenv_=0
+    fi
+  }
 fi

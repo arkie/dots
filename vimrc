@@ -6,6 +6,12 @@ set wildmenu
 set t_Co=256
 syntax enable
 
+" Change backup files to /tmp
+call system('mkdir /tmp/vim')
+set directory=/tmp/vim//
+set undodir=/tmp/vim//
+set undofile
+
 " Reload the current buffer if changed externally.
 set autoread
 

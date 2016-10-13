@@ -2,12 +2,6 @@
 # Get the containing directory.
 DOTS=$(cd "$(dirname "$0")" && pwd -P)
 
-# If there's an iCloud Drive folder, symlink it into $HOME.
-CLOUD="$HOME/Library/Mobile Documents/com~apple~CloudDocs/"
-if [ -d "$CLOUD" -a ! -a "$HOME/Cloud" ]; then
-  ln -s "$CLOUD" "$HOME/Cloud"
-fi
-
 # Symlink the rc files.
 for f in "$DOTS"/*rc; do
   ln -s "$f" $HOME/.$(basename "$f")
@@ -40,3 +34,15 @@ if [ "$(uname -s)" == 'Darwin' ]; then
     fi
   fi
 fi
+
+GOPATH="/usr/local/go"
+if [ ! -d "$GOPATH" ]; then
+  read -e -n 1 -p 'Create $GOPATH (y/N)? ' GO
+  if [ "$GO" == 'y' ]; then
+    mkdir -p "$GOPATH/src/github.com"
+    ln -s "$HOME/Documents" "$GOPATH/src/github.com/$USER"
+  fi
+fi
+
+# Currently not auto installing packages:
+# brew install homebrew/dupes/screen the_silver_searcher go nethack

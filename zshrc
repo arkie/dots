@@ -3,6 +3,16 @@ autoload -Uz colors && colors
 autoload -Uz compinit && compinit
 autoload -Uz vcs_info
 
+# Enable zsh history.
+setopt append_history
+setopt extended_history
+setopt hist_expire_dups_first
+setopt hist_ignore_dups
+setopt share_history
+HISTFILE='/tmp/zsh'
+HISTSIZE=1000
+SAVEHIST=1000
+
 # Set up the environment.
 export EDITOR='vim'
 export NETHACKOPTIONS='autodig,boulder=0,color,decgraphics,lit_corridor,nopet,pickup_types=$,time'
@@ -47,32 +57,42 @@ alias dl='screen -ls'
 alias grep='grep --color=auto'
 alias ls='ls -G'
 alias l='ls -lAh'
+alias ag='ag -s'
 
 # Handle conditional shortcuts.
-if [ -e "$HOME/Cloud" ]; then
-  c(){cd "$HOME/Cloud/$1"; ls}
-  compctl -W "$HOME/Cloud" -/ c
+if [ -e "/usr/local/go" ]; then
+  export GOPATH="/usr/local/go"
 fi
-if [ -e "$HOME/Documents" ]; then
+if [ -d "$HOME/Documents" ]; then
   d(){cd "$HOME/Documents/$1"; ls}
   compctl -W "$HOME/Documents" -/ d
-  if [ -e "$HOME/Documents/go" ]; then
-    export GOPATH="$HOME/Documents/go"
-  fi
 fi
 if [ -d "$GOPATH" ]; then
+  if [ -d "$GOPATH/src/github.com/$USER" ]; then
+    g(){cd "$GOPATH/src/github.com/$USER/$1"; ls}
+    compctl -W "$GOPATH/src/github.com/$USER" -/ g
+  fi
   PATH="$PATH:$GOPATH/bin"
+  alias goco='go test -coverprofile=cover -covermode=count && go tool cover -html=cover && rm cover'
 fi
 if [ -d "$HOME/Library/Logs/CoreSimulator" ]; then
   alias simlog='tail -f $HOME/Library/Logs/CoreSimulator/*/system.log'
 fi
 if [ -x "$(command -v virtualenv)" ]; then
-  virtualenv_=0
   virt(){
-    if [ "$virtualenv_" = 0 ]; then
-      virtualenv /tmp/env && source /tmp/env/bin/activate && virtualenv_=1
+    if [[ "$VIRTUAL_ENV" =~ '/tmp/virtualenv' ]]; then
+      deactivate && rm -rf /tmp/virtualenv
     else
-      deactivate && rm -rf /tmp/env && virtualenv_=0
+      virtualenv /tmp/virtualenv/py && source /tmp/virtualenv/py/bin/activate
     fi
   }
+  if [ -x "$(command -v python3)" ]; then
+    virt3(){
+      if [[ "$VIRTUAL_ENV" =~ '/tmp/virtualenv' ]]; then
+        deactivate && rm -rf /tmp/virtualenv
+      else
+        virtualenv -p python3 /tmp/virtualenv/py3 && source /tmp/virtualenv/py3/bin/activate
+      fi
+    }
+  fi
 fi

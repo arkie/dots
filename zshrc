@@ -5,6 +5,7 @@ autoload -Uz vcs_info
 
 # Enable zsh history.
 setopt append_history
+setopt extended_glob
 setopt extended_history
 setopt hist_expire_dups_first
 setopt hist_ignore_dups
@@ -58,6 +59,9 @@ alias grep='grep --color=auto'
 alias ls='ls -G'
 alias l='ls -lAh'
 alias ag='ag -s'
+
+# Set additional zsh options.
+setopt rm_star_silent
 
 # Handle conditional shortcuts.
 if [ -e "/usr/local/go" ]; then

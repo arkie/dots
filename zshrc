@@ -57,7 +57,7 @@ else
   alias ls='ls --color'
 fi
 
-# Set up left and right prompt.
+# Set up right prompt.
 RPS1='%*'
 
 # Set up common aliases.

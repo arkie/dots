@@ -39,10 +39,6 @@ else
   }
 fi
 
-# Set up left and right prompts.
-PS1=' %F{blue}%1~${vcs_info_msg_0_}%f '
-RPS1='%*'
-
 # Set vim key mode and bindings.
 bindkey -v
 bindkey -M viins 'jk' vi-cmd-mode
@@ -52,11 +48,22 @@ bindkey '^r' history-incremental-search-backward
 bindkey '^w' backward-kill-word
 bindkey "^?" backward-delete-char
 
+# Change prompt, flags if running on OSX.
+if [[ "$(uname -s)" == 'Darwin' ]]; then
+  PS1=' %F{blue}%1~${vcs_info_msg_0_}%f '
+  alias ls='ls -G'
+else
+  PS1=' %B%F{blue}%1~${vcs_info_msg_0_}%f%b '
+  alias ls='ls --color'
+fi
+
+# Set up left and right prompt.
+RPS1='%*'
+
 # Set up common aliases.
 alias dr='screen -DR'
 alias dl='screen -ls'
 alias grep='grep --color=auto'
-alias ls='ls -G'
 alias l='ls -lAh'
 alias ag='ag -s'
 

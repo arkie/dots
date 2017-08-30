@@ -1,9 +1,10 @@
 [alias]
-  br = branch
-  co = checkout
-  st = status
-  su = submodule foreach git pull origin master
+	br = branch
+	co = checkout
+	st = status
+	su = submodule foreach git pull origin master
 [push]
-  default = current
+	default = current
 [user]
-  email = char7f@gmail.com
+	email = char7f@gmail.com
+	name = Jon Caldwell

@@ -32,6 +32,12 @@ if [ "$(uname -s)" == 'Darwin' ]; then
     if [ "$BREW" == 'y' ]; then
       ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     fi
+    # Optionally clear out dock.
+    read -e -n 1 -p 'Clear Dock (y/N)? ' DOCK
+    if [ "$DOCK" == 'y' ]; then
+      defaults write com.apple.dock persistent-apps -array
+      killall Dock
+    fi
   fi
 fi
 

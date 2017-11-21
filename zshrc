@@ -2,6 +2,7 @@
 autoload -Uz colors && colors
 autoload -Uz compinit && compinit
 autoload -Uz vcs_info
+autoload -Uz zmv
 
 # Enable zsh history.
 setopt append_history
@@ -10,9 +11,9 @@ setopt extended_history
 setopt hist_expire_dups_first
 setopt hist_ignore_dups
 setopt share_history
-HISTFILE='/tmp/zsh'
-HISTSIZE=1000
-SAVEHIST=1000
+HISTFILE=~/.zsh_history
+HISTSIZE=100000
+SAVEHIST=1000000
 
 # Set up the environment.
 export EDITOR='vim'
@@ -82,6 +83,8 @@ fi
 if [ -d "$HOME/Library/Logs/CoreSimulator" ]; then
   alias simlog='tail -f $HOME/Library/Logs/CoreSimulator/*/system.log'
 fi
+
+# Use virtualenv toggles if installed.
 if [ -x "$(command -v virtualenv)" ]; then
   virt(){
     if [[ "$VIRTUAL_ENV" =~ '/tmp/virtualenv' ]]; then
@@ -99,4 +102,11 @@ if [ -x "$(command -v virtualenv)" ]; then
       fi
     }
   fi
+fi
+
+# Use ripgrep with sed if installed.
+if [ -x "$(command -v rg)" ]; then
+  rgs(){
+    rg -l $1 | xargs sed -i '' "s/$1/$2/g"
+  }
 fi

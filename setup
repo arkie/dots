@@ -45,4 +45,4 @@ if [ ! -d "$GOPATH" ]; then
 fi
 
 # Currently not auto installing packages:
-# brew install homebrew/dupes/screen the_silver_searcher go nethack
+# brew install homebrew/dupes/screen nethack ripgrep

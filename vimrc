@@ -55,14 +55,11 @@ augroup reload
 
   " Add filetype local behavior.
   autocmd BufWritePost *.go silent execute "!gofmt -s -w %" | redraw!
+  " TODO: Check for existence of prettier.
+  autocmd BufWritePost *.js silent execute "!prettier prettier --jsx-bracket-same-line --no-bracket-spacing --single-quote --write %" | redraw!
   autocmd FileType css setlocal iskeyword+=-
   autocmd FileType gitcommit,markdown setlocal spell
   autocmd FileType go setlocal noexpandtab
   autocmd FileType html setlocal textwidth=0
   autocmd FileType text setlocal textwidth=0
 augroup END
-
-" Add a git blame command.
-if !exists(':Blame')
-  command Blame !cd "%:p:h" && git blame "%:t"
-endif

@@ -72,8 +72,8 @@ alias ag='ag -s'
 setopt rm_star_silent
 
 # Handle conditional shortcuts.
-if [ -e "/usr/local/go" ]; then
-  export GOPATH="/usr/local/go"
+if [ -e "/usr/local/share/go" ]; then
+  export GOPATH="/usr/local/share/go"
 fi
 if [ -d "$HOME/Documents" ]; then
   d(){cd "$HOME/Documents/$1"; ls}

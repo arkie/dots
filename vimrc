@@ -57,6 +57,8 @@ augroup reload
   autocmd BufWritePost *.go silent execute "!gofmt -s -w %" | redraw!
   " TODO: Check for existence of prettier.
   autocmd BufWritePost *.js silent execute "!prettier prettier --jsx-bracket-same-line --no-bracket-spacing --single-quote --write %" | redraw!
+  " TODO: Check for existence of swiftformat.
+  autocmd BufWritePost *.swift silent execute "!swiftformat --indent 2 %" | redraw!
   autocmd FileType css setlocal iskeyword+=-
   autocmd FileType gitcommit,markdown setlocal spell
   autocmd FileType go setlocal noexpandtab

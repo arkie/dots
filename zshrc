@@ -52,7 +52,7 @@ bindkey "^?" backward-delete-char
 # Change prompt, flags if running on OSX.
 if [[ "$(uname -s)" == 'Darwin' ]]; then
   PS1=' %F{blue}%1~${vcs_info_msg_0_}%f '
-  alias ls='ls -G'
+  alias ls='ls -GT'
 else
   PS1=' %B%F{blue}%1~${vcs_info_msg_0_}%f%b '
   alias ls='ls --color'
@@ -91,29 +91,9 @@ if [ -d "$HOME/Library/Logs/CoreSimulator" ]; then
   alias simlog='tail -f $HOME/Library/Logs/CoreSimulator/*/system.log'
 fi
 
-# Use virtualenv toggles if installed.
-if [ -x "$(command -v virtualenv)" ]; then
-  virt(){
-    if [[ "$VIRTUAL_ENV" =~ '/tmp/virtualenv' ]]; then
-      deactivate && rm -rf /tmp/virtualenv
-    else
-      virtualenv /tmp/virtualenv/py && source /tmp/virtualenv/py/bin/activate
-    fi
-  }
-  if [ -x "$(command -v python3)" ]; then
-    virt3(){
-      if [[ "$VIRTUAL_ENV" =~ '/tmp/virtualenv' ]]; then
-        deactivate && rm -rf /tmp/virtualenv
-      else
-        virtualenv -p python3 /tmp/virtualenv/py3 && source /tmp/virtualenv/py3/bin/activate
-      fi
-    }
-  fi
-fi
-
 # Use ripgrep with sed if installed.
 if [ -x "$(command -v rg)" ]; then
   rgs(){
-    rg -l $1 | xargs sed -i '' "s/$1/$2/g"
+    rg -l $1 | xargs sed -i '' "s$1$2g"
   }
 fi

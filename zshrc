@@ -4,6 +4,9 @@ autoload -Uz compinit && compinit
 autoload -Uz vcs_info
 autoload -Uz zmv
 
+# Rehash zsh's completion on miss.
+zstyle ':completion:*' rehash true
+
 # Enable zsh history.
 setopt append_history
 setopt extended_glob
@@ -54,7 +57,7 @@ if [[ "$(uname -s)" == 'Darwin' ]]; then
   PS1=' %F{blue}%1~${vcs_info_msg_0_}%f '
   alias ls='ls -GT'
 else
-  PS1=' %B%F{blue}%1~${vcs_info_msg_0_}%f%b '
+  PS1=' %B%F{27}%1~${vcs_info_msg_0_}%f%b '
   alias ls='ls --color'
 fi
 

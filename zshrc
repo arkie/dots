@@ -65,7 +65,7 @@ fi
 RPS1='%*'
 
 # Set up common aliases.
-alias dr='screen -DR'
+alias dr='screen -T screen-256color -DR'
 alias dl='screen -ls'
 alias grep='grep --color=auto'
 alias l='ls -lAh'

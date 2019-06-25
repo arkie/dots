@@ -82,6 +82,10 @@ if [ -d "$HOME/Documents" ]; then
   d(){cd "$HOME/Documents/$1"; ls}
   compctl -W "$HOME/Documents" -/ d
 fi
+if [ -d "$HOME/Work" ]; then
+  k(){cd "$HOME/Work/$1"; ls}
+  compctl -W "$HOME/Work" -/ k
+fi
 if [ -d "$GOPATH" ]; then
   if [ -d "$GOPATH/src/github.com/$USER" ]; then
     g(){cd "$GOPATH/src/github.com/$USER/$1"; ls}

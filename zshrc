@@ -69,7 +69,7 @@ alias dr='screen -T screen-256color -DR'
 alias dl='screen -ls'
 alias grep='grep --color=auto'
 alias l='ls -lAh'
-alias ag='ag -s'
+alias srv='python -m SimpleHTTPServer'
 
 # Set additional zsh options.
 setopt rm_star_silent
@@ -81,6 +81,10 @@ fi
 if [ -d "$HOME/Documents" ]; then
   d(){cd "$HOME/Documents/$1"; ls}
   compctl -W "$HOME/Documents" -/ d
+fi
+if [ -d "$HOME/Play" ]; then
+  p(){cd "$HOME/Play/$1"; ls}
+  compctl -W "$HOME/Play" -/ p
 fi
 if [ -d "$HOME/Work" ]; then
   k(){cd "$HOME/Work/$1"; ls}

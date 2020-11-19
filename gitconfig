@@ -3,6 +3,7 @@
 	co = checkout
 	st = status
 	su = submodule foreach git pull origin master
+	merged = !git co master && git pull && git br -d `git br --merged | grep -v master`
 [push]
 	default = current
 [user]

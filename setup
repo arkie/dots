@@ -30,7 +30,7 @@ if [ "$(uname -s)" == 'Darwin' ]; then
     # Optionally install Homebrew.
     read -e -n 1 -p 'Install Homebrew (y/N)? ' BREW
     if [ "$BREW" == 'y' ]; then
-      ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+      /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
     fi
     # Optionally clear out dock.
     read -e -n 1 -p 'Clear Dock (y/N)? ' DOCK

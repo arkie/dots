@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 # Get the containing directory.
 DOTS=$(cd "$(dirname "$0")" && pwd -P)
 
@@ -25,16 +25,16 @@ if [ "$SHELL" != "/bin/zsh" ]; then
 fi
 
 # Check if running on OSX.
-if [ "$(uname -s)" == 'Darwin' ]; then
+if [ "$(uname -s)" = 'Darwin' ]; then
   if ! type brew 2>/dev/null; then
     # Optionally install Homebrew.
     read -e -n 1 -p 'Install Homebrew (y/N)? ' BREW
-    if [ "$BREW" == 'y' ]; then
+    if [ "$BREW" = 'y' ]; then
       /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
     fi
     # Optionally clear out dock.
     read -e -n 1 -p 'Clear Dock (y/N)? ' DOCK
-    if [ "$DOCK" == 'y' ]; then
+    if [ "$DOCK" = 'y' ]; then
       defaults write com.apple.dock persistent-apps -array
       killall Dock
     fi
@@ -44,7 +44,7 @@ fi
 GOPATH="/usr/local/share/go"
 if [ ! -d "$GOPATH" ]; then
   read -e -n 1 -p 'Create $GOPATH (y/N)? ' GO
-  if [ "$GO" == 'y' ]; then
+  if [ "$GO" = 'y' ]; then
     mkdir -p "$GOPATH/src/github.com"
     ln -s "$HOME/Documents" "$GOPATH/src/github.com/$USER"
   fi

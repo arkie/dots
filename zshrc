@@ -75,9 +75,6 @@ alias srv='python -m SimpleHTTPServer'
 setopt rm_star_silent
 
 # Handle conditional shortcuts.
-if [ -e "/usr/local/share/go" ]; then
-  export GOPATH="/usr/local/share/go"
-fi
 if [ -d "$HOME/Documents" ]; then
   d(){cd "$HOME/Documents/$1"; ls}
   compctl -W "$HOME/Documents" -/ d
@@ -85,21 +82,6 @@ fi
 if [ -d "$HOME/Play" ]; then
   p(){cd "$HOME/Play/$1"; ls}
   compctl -W "$HOME/Play" -/ p
-fi
-if [ -d "$HOME/Work" ]; then
-  k(){cd "$HOME/Work/$1"; ls}
-  compctl -W "$HOME/Work" -/ k
-fi
-if [ -d "$GOPATH" ]; then
-  if [ -d "$GOPATH/src/github.com/$USER" ]; then
-    g(){cd "$GOPATH/src/github.com/$USER/$1"; ls}
-    compctl -W "$GOPATH/src/github.com/$USER" -/ g
-  fi
-  PATH="$PATH:$GOPATH/bin"
-  alias goco='go test -coverprofile=cover -covermode=count && go tool cover -html=cover && rm cover'
-fi
-if [ -d "$HOME/Library/Logs/CoreSimulator" ]; then
-  alias simlog='tail -f $HOME/Library/Logs/CoreSimulator/*/system.log'
 fi
 
 # Use ripgrep with sed if installed.

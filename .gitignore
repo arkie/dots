@@ -1,3 +1,6 @@
 .*.swp
 .DS_Store
+.bundle
+.jekyll-cache
+_site
 xcuserdata

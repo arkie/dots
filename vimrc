@@ -1,7 +1,7 @@
 " Enable default settings.
 filetype plugin indent on
 set ruler
-set textwidth=80
+set synmaxcol=80
 set wildmenu
 set t_Co=256
 syntax enable
@@ -49,7 +49,6 @@ augroup reload
   autocmd BufEnter * checktime
 
   " Add non-standard extensions.
-  autocmd BufNewFile,BufRead *.json set filetype=javascript
   autocmd BufNewFile,BufRead *.md set filetype=markdown
   autocmd BufNewFile,BufRead *.txt set filetype=text
 

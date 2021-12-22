@@ -1,7 +1,6 @@
 # Set up screen.
 altscreen on
 defscrollback 5000
-nethack on
 startup_message off
 
 # Allow mouse scrollback.

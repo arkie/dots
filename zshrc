@@ -74,6 +74,10 @@ alias srv='python -m SimpleHTTPServer'
 # Set additional zsh options.
 setopt rm_star_silent
 
+if [ -e "$HOME/.go" ]; then
+  export GOPATH="$HOME/.go"
+  PATH="$PATH:$GOPATH/bin"
+fi
 # Handle conditional shortcuts.
 if [ -d "$HOME/Documents" ]; then
   d(){cd "$HOME/Documents/$1"; ls}

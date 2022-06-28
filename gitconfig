@@ -7,7 +7,7 @@
 [push]
 	default = current
 [user]
-	email = char7f@gmail.com
+	email = jon@idk.club
 	name = Jon
 [pull]
 	rebase = false

@@ -6,10 +6,11 @@ set wildmenu
 set t_Co=256
 syntax enable
 
-" Change backup files to /tmp
-call system('mkdir /tmp/vim')
-set directory=/tmp/vim//
-set undodir=/tmp/vim//
+if !isdirectory($HOME . "/.cache/vim")
+  call mkdir($HOME . "/.cache/vim")
+endif
+set directory=$HOME/.cache/vim//
+set undodir=$HOME/.cache/vim//
 set undofile
 
 " Reload the current buffer if changed externally.
@@ -54,8 +55,6 @@ augroup reload
 
   " Add filetype local behavior.
   autocmd BufWritePost *.go silent execute "!gofmt -s -w %" | redraw!
-  " TODO: Check for existence of swiftformat.
-  autocmd BufWritePost *.swift silent execute "!swiftformat %" | redraw!
   autocmd FileType css setlocal iskeyword+=-
   autocmd FileType gitcommit,markdown setlocal spell
   autocmd FileType go setlocal noexpandtab

@@ -3,14 +3,13 @@ filetype plugin indent on
 set ruler
 set synmaxcol=80
 set wildmenu
-set t_Co=256
 syntax enable
 
-if !isdirectory($HOME . "/.cache/vim")
-  call mkdir($HOME . "/.cache/vim")
+if !isdirectory($HOME . "/.config/vim")
+  call mkdir($HOME . "/.config/vim", "p")
 endif
-set directory=$HOME/.cache/vim//
-set undodir=$HOME/.cache/vim//
+set directory=$HOME/.config/vim//
+set undodir=$HOME/.config/vim//
 set undofile
 
 " Reload the current buffer if changed externally.

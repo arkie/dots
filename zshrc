@@ -21,14 +21,13 @@ SAVEHIST=1000000
 # Set up the environment.
 export EDITOR='vim'
 export NETHACKOPTIONS='autodig,boulder=0,color,decgraphics,lit_corridor,nopet,pickup_types=$,time'
-export PATH="$PATH:node_modules/.bin"
 
 # Enable prompt variable use and configure the VCS prompt.
 setopt prompt_subst
 zstyle ':vcs_info:*' formats '%F{green}%b'
 zstyle ':vcs_info:*' actionformats '%F{green}%b%F{blue}«%F{green}%a'
 
-# Initailize VCS info, and in screen set the title to last command.
+# Initialize VCS info, and in screen set the title to last command.
 if [[ "$TERM" == "screen" ]]; then
   precmd () {
     echo -ne "\ekzsh\e\\"
@@ -74,10 +73,6 @@ alias srv='python -m SimpleHTTPServer'
 # Set additional zsh options.
 setopt rm_star_silent
 
-if [ -e "$HOME/.go" ]; then
-  export GOPATH="$HOME/.go"
-  PATH="$PATH:$GOPATH/bin"
-fi
 # Handle conditional shortcuts.
 if [ -d "$HOME/Documents" ]; then
   d(){cd "$HOME/Documents/$1"; ls}

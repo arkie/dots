@@ -11,3 +11,5 @@
 	name = Jon
 [pull]
 	rebase = false
+[init]
+	defaultBranch = master

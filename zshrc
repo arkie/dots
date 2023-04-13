@@ -20,7 +20,8 @@ SAVEHIST=1000000
 
 # Set up the environment.
 export EDITOR='vim'
-export NETHACKOPTIONS='autodig,boulder=0,color,decgraphics,lit_corridor,nopet,pickup_types=$,time'
+export GOPATH=$HOME/.config/go
+export NETHACKOPTIONS='autodig,boulder=0,color,decgraphics,hilite_pile,hilite_status:hitpoints/100%/brightgreen,hilite_status:hitpoints/<100%/green,hilite_status:hitpoints/<60%/yellow,hilite_status:hitpoints/<40%/red,hilite_status:power/100%/brightgreen,hilite_status:power/<100%/green,hilite_status:power/<60%/yellow,hilite_status:power/<40%/red,hitpointbar,lit_corridor,nopet,pickup_types=$,statushilites,time'
 
 # Enable prompt variable use and configure the VCS prompt.
 setopt prompt_subst

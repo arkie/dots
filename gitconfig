@@ -9,7 +9,5 @@
 [user]
 	email = jon@idk.club
 	name = Jon
-[pull]
-	rebase = false
 [init]
 	defaultBranch = master

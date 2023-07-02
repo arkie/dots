@@ -3,4 +3,4 @@ defscrollback 1000000
 startup_message off
 
 # Set status line to show windows, time.
-hardstatus lastline '%{=} %=%w %=%c:%s '
+hardstatus alwayslastline '%{=} %=%w %=%c:%s '

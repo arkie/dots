@@ -16,6 +16,7 @@ setopt hist_ignore_dups
 setopt share_history
 HISTFILE=~/.zsh_history
 HISTSIZE=100000
+REPORTTIME=1
 SAVEHIST=1000000
 
 # Set up the environment.
@@ -27,6 +28,7 @@ export NETHACKOPTIONS='autodig,boulder=0,color,decgraphics,hilite_pile,hilite_st
 setopt prompt_subst
 zstyle ':vcs_info:*' formats '%F{green}%b'
 zstyle ':vcs_info:*' actionformats '%F{green}%b%F{blue}«%F{green}%a'
+TIMEFMT="$fg[cyan]%J$reset_color user $fg[yellow]%*U$reset_color sys $fg[yellow]%*S $fg[blue]%*E"
 
 # Initialize VCS info, and in screen set the title to last command.
 if [[ "$TERM" == "screen" ]]; then
@@ -52,24 +54,22 @@ bindkey '^r' history-incremental-search-backward
 bindkey '^w' backward-kill-word
 bindkey "^?" backward-delete-char
 
-# Change prompt, flags if running on OSX.
+# Change ls flags if running on OSX.
 if [[ "$(uname -s)" == 'Darwin' ]]; then
-  PS1=' %F{blue}%1~${vcs_info_msg_0_}%f '
   alias ls='ls -GT'
 else
-  PS1=' %B%F{27}%1~${vcs_info_msg_0_}%f%b '
   alias ls='ls --color'
 fi
 
-# Set up right prompt.
-RPS1='%*'
+PROMPT='
+%B%K{cyan}%F{black}%*%f%k %1~${vcs_info_msg_0_}%f%k%b
+%F{cyan}└%f '
 
 # Set up common aliases.
 alias dr='screen -T screen-256color -DR'
 alias dl='screen -ls'
 alias grep='grep --color=auto'
 alias l='ls -lAh'
-alias srv='python -m SimpleHTTPServer'
 
 # Set additional zsh options.
 setopt rm_star_silent
@@ -82,6 +82,9 @@ fi
 if [ -d "$HOME/Play" ]; then
   p(){cd "$HOME/Play/$1"; ls}
   compctl -W "$HOME/Play" -/ p
+fi
+if [ -d "$HOME/.local/bin" ]; then
+  export PATH=$HOME/.local/bin:$PATH
 fi
 
 # Use ripgrep with sed if installed.

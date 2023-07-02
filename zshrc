@@ -62,8 +62,8 @@ else
 fi
 
 PROMPT='
-%B%K{cyan}%F{black}%*%f%k %1~${vcs_info_msg_0_}%f%k%b
-%F{cyan}└%f '
+╭ %* %B%F{blue}%1~%b${vcs_info_msg_0_}%f
+'
 
 # Set up common aliases.
 alias dr='screen -T screen-256color -DR'

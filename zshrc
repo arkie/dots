@@ -30,20 +30,13 @@ zstyle ':vcs_info:*' formats '%F{green}%b'
 zstyle ':vcs_info:*' actionformats '%F{green}%b%F{blue}«%F{green}%a'
 TIMEFMT="$fg[cyan]%J$reset_color user $fg[yellow]%*U$reset_color sys $fg[yellow]%*S $fg[blue]%*E"
 
-# Initialize VCS info, and in screen set the title to last command.
-if [[ "$TERM" == "screen" ]]; then
-  precmd () {
-    echo -ne "\ekzsh\e\\"
-    vcs_info
-  }
-  preexec () {
-    echo -ne "\ek$1\e\\"
-  }
-else
-  precmd () {
-    vcs_info
-  }
-fi
+precmd () {
+  vcs_info
+}
+preexec () {
+  echo -ne "\e[0m
+"
+}
 
 # Set vim key mode and bindings.
 bindkey -v
@@ -58,12 +51,12 @@ bindkey "^?" backward-delete-char
 if [[ "$(uname -s)" == 'Darwin' ]]; then
   alias ls='ls -GT'
 else
-  alias ls='ls --color'
+  alias ls='ls --color=auto'
 fi
 
 PROMPT='
 ╭ %* %B%F{blue}%1~%b${vcs_info_msg_0_}%f
-'
+%B'
 
 # Set up common aliases.
 alias dr='screen -T screen-256color -DR'
@@ -93,3 +86,5 @@ if [ -x "$(command -v rg)" ]; then
     rg -l $1 | xargs sed -i '' "s$1$2g"
   }
 fi
+
+alias q='noglob q'
